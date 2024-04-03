@@ -33,5 +33,24 @@ services:
     tty: true
     depends_on:
       - db
+  frontend:
+    build:
+      context: ./
+      dockerfile: ./deploy/docker/Dockerfile.frontend
+    command:
+      - /bin/sh
+      - -c
+      - |
+        yarn start
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules/
+      - /app/.next
+    ports:
+      - 3000:3000
+    env_file:
+      - .env
+    stdin_open: true
+    tty: true
 volumes:
   pg_data:
