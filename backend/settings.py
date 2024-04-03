@@ -29,7 +29,6 @@ SECRET_KEY = 'django-insecure-lu#hk9)=#n-7tnl(^1qz0&5(8+_*^8iwl+24x88rw6oqj5bagg
 DEBUG = True
 
 ALLOWED_HOSTS = env.get('ALLOWED_HOSTS', '').split(',')
-print(ALLOWED_HOSTS, env.get('ALLOWED_HOSTS', '123'))
 
 # Application definition
 
@@ -123,6 +122,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+if DEBUG:
+    STATICFILES_FINDERS = [
+        'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    ]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
