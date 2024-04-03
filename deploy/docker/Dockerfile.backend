@@ -1,0 +1,14 @@
+FROM python:3.10.8 as final
+
+RUN apt-get update && \
+  apt-get install -y build-essential libpq-dev gettext && \
+  apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false && \
+  pip install -U pip && \
+  rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+
+COPY ./backend/requirements.txt .
+
+RUN pip install -r ./requirements.txt
